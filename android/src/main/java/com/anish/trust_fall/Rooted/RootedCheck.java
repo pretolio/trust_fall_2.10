@@ -1,9 +1,9 @@
 package com.anish.trust_fall.Rooted;
 
 import android.content.Context;
+import android.os.Build;
 
 import com.scottyab.rootbeer.RootBeer;
-import android.os.Build;
 
 public class RootedCheck {
     private static final String ONEPLUS = "oneplus";

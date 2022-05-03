@@ -12,16 +12,20 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 import io.flutter.plugin.common.MethodChannel.MethodCallHandler;
 import io.flutter.plugin.common.MethodChannel.Result;
-import io.flutter.plugin.common.PluginRegistry.Registrar;
+import androidx.annotation.NonNull;
+import io.flutter.embedding.engine.plugins.FlutterPlugin;
 
 /** TrustFallPlugin */
-public class TrustFallPlugin implements MethodCallHandler {
+public class TrustFallPlugin implements FlutterPlugin, MethodCallHandler {
   /** Plugin registration. */
 
   private final Context context;
-  public static void registerWith(Registrar registrar) {
-    final MethodChannel channel = new MethodChannel(registrar.messenger(), "trust_fall");
-    channel.setMethodCallHandler(new TrustFallPlugin(registrar.context()));
+  private MethodChannel channel;
+
+  @Override
+  public void onAttachedToEngine(@NonNull FlutterPluginBinding flutterPluginBinding) {
+    channel = new MethodChannel(flutterPluginBinding.getBinaryMessenger(), "trust_fall");
+    channel.setMethodCallHandler(this);
   }
 
   private TrustFallPlugin(Context context){
@@ -29,7 +33,7 @@ public class TrustFallPlugin implements MethodCallHandler {
   }
 
   @Override
-  public void onMethodCall(MethodCall call, final Result result) {
+  public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
     if (call.method.equals("getPlatformVersion")) {
       result.success("Android " + android.os.Build.VERSION.RELEASE);
     } else if (call.method.equals("isJailBroken")) {
@@ -56,5 +60,10 @@ public class TrustFallPlugin implements MethodCallHandler {
     else {
       result.notImplemented();
     }
+  }
+
+  @Override
+  public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+    channel.setMethodCallHandler(null);
   }
 }

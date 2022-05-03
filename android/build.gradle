@@ -1,5 +1,5 @@
 group 'com.anish.trust_fall'
-version '1.0-SNAPSHOT'
+version '1.0'
 
 buildscript {
     repositories {
@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.4'
+        classpath 'com.android.tools.build:gradle:4.1.0'
     }
 }
 
@@ -24,15 +24,16 @@ apply plugin: 'com.android.library'
 android {
     compileSdkVersion 31
 
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
     defaultConfig {
         minSdkVersion 18
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-    lintOptions {
-        disable 'InvalidPackage'
-    }
+
     dependencies {
         implementation 'com.scottyab:rootbeer-lib:0.0.7'
     }
-
 }

@@ -1,52 +1,15 @@
-# trust_fall
+# trust_fall_2
 
-A Flutter plugin for detecting the trust fall of the device(Jailbroken, root, emulator and mock location detection).
-
-Uses [RootBeer](https://github.com/scottyab/rootbeer) for Android root detection and [DTTJailbreakDetection](https://github.com/thii/DTTJailbreakDetection) for iOS jailbreak detection.
-Inspired by [jail-monkey](https://github.com/GantMan/jail-monkey) and [this blog article](http://blog.geomoby.com/2015/01/25/how-to-avoid-getting-your-location-based-app-spoofed/) 
+A new Flutter project.
 
 ## Getting Started
 
-In your flutter project add the dependency:
+This project is a starting point for a Flutter
+[plug-in package](https://flutter.dev/developing-packages/),
+a specialized package that includes platform-specific implementation code for
+Android and/or iOS.
 
-```yml
-dependencies:
-  ...
-  trust_fall: ^1.0.4
-```
+For help getting started with Flutter, view our
+[online documentation](https://flutter.dev/docs), which offers tutorials,
+samples, guidance on mobile development, and a full API reference.
 
-
-## Usage
-#### Importing package
-```
-import 'package:trust_fall/trust_fall.dart';
-```
-#### Using it
-
-Checks whether device JailBroken on iOS/Android?
-```
-bool isJailBroken = await TrustFall.isJailBroken;
-```
-Checks whether device is real or emulator
-```
-bool isRealDevice = await TrustFall.isRealDevice;
-```
-Can this device mock location - no need to root!
-```
-bool canMockLocation = await TrustFall.canMockLocation;
-```
-(ANDROID ONLY) Check if application is running on external storage
-```
-bool isOnExternalStorage = await TrustFall.isOnExternalStorage;
-```
-Check if device violates any of the above
-```
-bool isTrustFall = await TrustFall.isTrustFall;
-```
-
-# Note:
-#### Mock location detection
-* **Android** - Location permission needs to be granted in app in order to detect mock location properly
-* **iOS** - For now we are checking if device is Jail Broken or if it's not real device. There is no strong detection of mock location in iOS *(Open the PR if you have better way for mock location detection in iOS)*
-
-## ❗Since emulators are usually rooted, you might want to bypass these checks during development. Unless you're keen on constant false alarms ⏰
